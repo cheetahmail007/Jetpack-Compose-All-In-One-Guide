@@ -5,12 +5,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,7 +34,7 @@ private fun LessonContent() {
     val currentPage = rememberSaveable { mutableIntStateOf(0) }
 
     LogicPager(
-        pageCount = 2,
+        pageCount = 3,
         currentPage = currentPage
     ) {
         Column(
@@ -50,6 +53,7 @@ private fun LessonContent() {
             when (currentPage.value) {
                 0 -> CounterDisplay()
                 1 -> ArticleDemo()
+                2 -> LazyColumnTesting()
             }
         }
     }
@@ -119,6 +123,18 @@ fun ArticleContent(content: String, onClick: () -> Unit = {}) {
             style = MaterialTheme.typography.body1,
             modifier = Modifier.clickable { onClick() }
         )
+    }
+}
+
+@Composable
+fun LazyColumnTesting(){
+
+    val myList = (1..20).toList()
+
+    LazyColumn(modifier = Modifier.testTag("lazyColumn")) {
+        items(myList){
+            androidx.compose.material3.Text(modifier = Modifier.padding(10.dp), text = it.toString())
+        }
     }
 }
 

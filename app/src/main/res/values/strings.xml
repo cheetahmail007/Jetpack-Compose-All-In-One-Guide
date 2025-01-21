@@ -87,6 +87,7 @@
     <string-array name="lesson_9_ui_test">
         <item>UI TEST Demo 1</item>
         <item>UI TEST Demo 2</item>
+        <item>UI Test Demo 3</item>
     </string-array>
 
     <string-array name="lesson_17_header_text">
